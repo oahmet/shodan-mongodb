@@ -10,3 +10,12 @@ def getCollections(ip):
         return json.dumps(c)
     except:
         print('Error: Cannot retrieve collection list')
+
+def getDBSize(ip):
+    try:
+        client = pymongo.MongoClient(ip, 27017, maxPoolSize=10)
+        for db in client.list_database_names():
+            dbstat = client[db].command("dbstats")
+            print('DBStat %s\n' % dbstat)
+    except:
+        print('Error: Cannot retrieve DB Stats')

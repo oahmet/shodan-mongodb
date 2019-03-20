@@ -11,8 +11,6 @@ filename = 'apikey'
 with open(filename, 'r') as f:
     APIKEY = f.read().strip()
 
-print('%s\n' % APIKEY)
-
 api = shodan.Shodan(APIKEY)
 
 query = 'MongoDB Server Information'
@@ -28,6 +26,7 @@ try:
         if "Authentication partially enabled" not in result['data']:
             print('IP: {}'.format(result['ip_str']))
             ip: str = format(result['ip_str'])
+            collections = mongodbsearch.getDBSize(ip)
             collections = mongodbsearch.getCollections(ip)
             if collections:
                 data = json.loads(collections)

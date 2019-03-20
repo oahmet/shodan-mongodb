@@ -5,13 +5,13 @@ from wordcloud import WordCloud, STOPWORDS
 def createWordCloud(text):
     try:
         print('Generating word cloud\n')
-        cloud = WordCloud().generate(text)
+        cloud = WordCloud(max_words=500, background_color="black").generate(text)
 
         # Display the generated image:
-        plt.figure(figsize=(10, 8), facecolor='white', edgecolor='blue')
         plt.imshow(cloud, interpolation='bilinear')
         plt.axis("off")
         plt.show()
+#        wordcloud.to_file('images/mongodb-wordcloud.png')
 
     except:
         print('Error occured while creating word cloud\n')
